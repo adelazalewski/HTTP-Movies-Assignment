@@ -29,7 +29,7 @@ console.log(movie);
     return <div>Loading movie information...</div>;
   }
 const deleteMovie = (e) => {
-
+e.preventDefault();
 axios.delete(`http://localhost:5000/api/movies/${params.id}`)
 .then((res) => {
   console.log("delete request res: ",res);
@@ -41,7 +41,12 @@ push("/");
 .catch(err => {
   console.log(err);
 })
+
 }
+
+const movieToUpdateMovieForm = () => {
+  push(`/update-movie/${params.id}`);
+  }
   return (
     <div className="save-wrapper">
       <MovieCard movie={movie} />
@@ -49,7 +54,7 @@ push("/");
       <div className="save-button" onClick={saveMovie}>
         Save
       </div>
-      <button>
+      <button onClick={movieToUpdateMovieForm}>
         Update Movie
       </button>
       <button onClick={deleteMovie}>

@@ -8,7 +8,7 @@ export default function Form()  {
         metascore: "",
         stars: ['']
     })
-    console.log(Number);
+    
     const handleChange = (e) => {
         e.persist();
         setMovie({[e.target.name]: e.target.value})
