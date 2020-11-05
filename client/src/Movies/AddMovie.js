@@ -1,21 +1,27 @@
+import React, {useState} from "react";
 import axios from "axios";
-import React, {useEffect, useState} from "react";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-
-export default function UpdateMovie(props) {
-    const params = useParams();
-    const {push} = useHistory();
-    //console.log(params);
+export default function AddMovieForm(props) {
+    const history = useHistory();
     const [movie, setMovie] = useState({
         id: Date.now(),
         title: '',
         director: '',
         metascore: "",
-        stars: ['']
+        stars: [""]
     })
+    
     const handleChange = (e) => {
         e.persist();
+        // if(e.target.name === "stars"){
+        //     movie.stars.toString();
+        //     setMovie({
+        //         ...movie,
+        //         [movie.stars]:e.target.value.toString(),
+                
+        //     })
+        // }else{
         setMovie({...movie,
             [e.target.name]: e.target.value})
     }
@@ -26,38 +32,22 @@ export default function UpdateMovie(props) {
         director: '',
         metascore: "",
         stars: ['']
-        });
-        axios.put(`http://localhost:5000/api/movies/${params.id}`, movie)
+        })
+        axios.post(`http://localhost:5000/api/movies`, movie)
         .then(res => {
-            console.log("update movie res: ", res);
+            console.log("post request res: ", res);
             props.setMovieList(res.data);
-            push("/");
+            history.push("/");
         })
-        .catch(err=>{
-            console.log(err);
-        })
+        .catch(err => console.log(err))
     }
-    useEffect(() => {
-        axios.get(`http://localhost:5000/api/movies/${params.id}`)
-        .then((res) => {
-            console.log("useEffcet fetch item response: ", res);
-            setMovie(res.data)
-          })
-          .then((err) => {
-            console.log(err)
-          })
-        }, [params.id]);
-    
-    return (
-        <>
-        <form onSubmit={submit}>
+return(
+    <form onSubmit={submit}>
         <input type="text" name="title" placeholder="Update Title" value={movie.title} onChange={handleChange} />
         <input type="text" name="director" value={movie.director} placeholder="Update Director" onChange={handleChange} />
         <input type="text" name="metascore" value={movie.metascore} placeholder="Update Score" onChange={handleChange}/>
         <input type="text" name="stars" value={movie.stars} placeholder="Add New Actor" onChange={handleChange}/>
-        <button>Update Movie</button>
+        <button>Add Movie</button>
     </form>
-        
-        </>
-    )
+)
 }

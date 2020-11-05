@@ -8,8 +8,8 @@ function Movie({ addToSavedList }) {
   const [successMessage, setSuccessMessage] = useState("")
   const params = useParams();
   const {push} = useHistory();
-  console.log(params);
-console.log(movie);
+  //console.log(params);
+//console.log(movie);
   const fetchMovie = (id) => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
@@ -36,7 +36,7 @@ axios.delete(`http://localhost:5000/api/movies/${params.id}`)
   
   setSuccessMessage(res.statusText);
   
-push("/");
+ push("/");
 })
 .catch(err => {
   console.log(err);
