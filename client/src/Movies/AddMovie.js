@@ -9,19 +9,12 @@ export default function AddMovieForm(props) {
         title: '',
         director: '',
         metascore: "",
-        stars: [""]
+        stars: [""],
+        
     })
     
     const handleChange = (e) => {
         e.persist();
-        // if(e.target.name === "stars"){
-        //     movie.stars.toString();
-        //     setMovie({
-        //         ...movie,
-        //         [movie.stars]:e.target.value.toString(),
-                
-        //     })
-        // }else{
         setMovie({...movie,
             [e.target.name]: e.target.value})
     }
