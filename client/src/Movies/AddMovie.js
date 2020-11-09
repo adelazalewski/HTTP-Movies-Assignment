@@ -9,7 +9,7 @@ export default function AddMovieForm(props) {
         title: '',
         director: '',
         metascore: "",
-        stars: [""],
+        stars: [""].join(),
         
     })
     
@@ -36,10 +36,10 @@ export default function AddMovieForm(props) {
     }
 return(
     <form onSubmit={submit}>
-        <input type="text" name="title" placeholder="Update Title" value={movie.title} onChange={handleChange} />
-        <input type="text" name="director" value={movie.director} placeholder="Update Director" onChange={handleChange} />
-        <input type="text" name="metascore" value={movie.metascore} placeholder="Update Score" onChange={handleChange}/>
-        <input type="text" name="stars" value={movie.stars} placeholder="Add New Actor" onChange={handleChange}/>
+        <input type="text" name="title" placeholder="Update Title" value={movie.title} onChange={e => setMovie({...movie, title: e.target.value})} />
+        <input type="text" name="director" value={movie.director} placeholder="Update Director" onChange={e=>setMovie({...movie, director: e.target.value})} />
+        <input type="text" name="metascore" value={movie.metascore} placeholder="Update Score" onChange={(e) => setMovie({...movie, metascore: e.target.value})}/>
+        <input type="text" name="stars" value={movie.stars} placeholder="Add New Actor" onChange={(e) => setMovie({...movie, stars: e.target.value.split(",")})}/>
         <button>Add Movie</button>
     </form>
 )

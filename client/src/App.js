@@ -10,7 +10,7 @@ import AddMovieForm from "./Movies/AddMovie";
 const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [movieList, setMovieList] = useState([]);
-console.log(movieList);
+//console.log(movieList);
   const getMovieList = () => {
     axios
       .get("http://localhost:5000/api/movies")
@@ -35,7 +35,7 @@ console.log(movieList);
       
 
       <Route path="/movies/:id"
-        render={(props) => <Movie {...props} addToSavedList={addToSavedList} />} />
+        render={(props) => <Movie {...props} addToSavedList={addToSavedList} setMovieList={setMovieList} movieList={movieList} />} />
       
       <Route path="/update-movie/:id"
         render={(props) => <UpdateMovie {...props} movieList={movieList} setMovieList={setMovieList} />} />

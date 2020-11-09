@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import MovieCard from "./MovieCard";
 
-function Movie({ addToSavedList }) {
+function Movie({ addToSavedList, setMovieList, movieList }) {
   const [movie, setMovie] = useState(null);
   const [successMessage, setSuccessMessage] = useState("")
   const params = useParams();
@@ -33,8 +33,8 @@ e.preventDefault();
 axios.delete(`http://localhost:5000/api/movies/${params.id}`)
 .then((res) => {
   console.log("delete request res: ",res);
+  setMovieList(movieList.filter(m => m.id !== res.data))
   
-  setSuccessMessage(res.statusText);
   
  push("/");
 })
